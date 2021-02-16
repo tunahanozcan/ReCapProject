@@ -17,10 +17,19 @@ namespace ConsoleUI
             ColorManager colorManager = new ColorManager(new EfColorDal());
 
             CarManager carManager1 = new CarManager(new EfCarDal());
-            foreach (var car in carManager1.GetCarDetails())
+            var result = carManager1.GetCarDetails();
+            if (result.Success==true)
             {
-                Console.WriteLine(car.CarName+" - " + car.BrandName);
+                foreach (var car in result.Data)
+                {
+                    Console.WriteLine(car.CarName + " - " + car.BrandName);
+                }
             }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+            
 
             /*
 
